@@ -6,91 +6,256 @@
 
   <style>
     body {
-      font-family: Arial;
-      background: #f5f5f5;
-      margin: 0;
-      scroll-behavior: smooth;
+      margin:0;
+      font-family:'Segoe UI', Arial;
+      background:#f8f8f8;
     }
 
-    a:hover {
-      opacity: 0.8;
+    /* HEADER */
+    .header {
+      background:#fff;
+      padding:12px 18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      box-shadow:0 2px 10px rgba(0,0,0,0.05);
+      position:sticky;
+      top:0;
+      z-index:10;
     }
+
+    .logo a {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color:#111;
+    }
+
+    .logo img {
+      height:60px;
+    }
+
+    .logo span {
+      font-weight:700;
+      font-size:20px;
+    }
+
+    .menu {
+      font-size:14px;
+      color:#666;
+    }
+
+    /* BANNER */
+    .banner {
+      background:linear-gradient(90deg,#25D366,#128C7E);
+      color:#fff;
+      text-align:center;
+      padding:30px 15px;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width:600px;
+      margin:auto;
+      padding:15px;
+    }
+
+    /* CARD */
+    .card {
+      background:#fff;
+      padding:15px;
+      border-radius:16px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.05);
+      margin-bottom:15px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .card:hover {
+      transform:translateY(-4px);
+    }
+
+    .card img {
+      width:100%;
+      border-radius:12px;
+    }
+
+    .price {
+      color:#25D366;
+      font-size:22px;
+      font-weight:bold;
+    }
+
+    .old {
+      text-decoration:line-through;
+      color:#999;
+    }
+
+    .slide {
+      display:flex;
+      overflow-x:auto;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .slide img {
+      width:220px;
+      border-radius:12px;
+    }
+
+    select {
+      width:100%;
+      padding:10px;
+      margin-top:10px;
+      border-radius:8px;
+      border:1px solid #ddd;
+    }
+
+    .btn {
+      background:#25D366;
+      color:#fff;
+      padding:14px;
+      text-align:center;
+      display:block;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:bold;
+      margin-top:12px;
+      transition:0.3s;
+    }
+
+    .btn:hover {
+      background:#1ebd5a;
+    }
+
+    .urgent {
+      color:#e53935;
+      font-weight:bold;
+    }
+
+    .detail {
+      display:none;
+    }
+
+    /* WA BUTTON */
+    .wa {
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#25D366;
+      color:#fff;
+      padding:15px;
+      border-radius:50px;
+      text-decoration:none;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    }
+
   </style>
 </head>
 
 <body>
 
 <!-- HEADER -->
-<div style="background:linear-gradient(90deg,#25D366,#128C7E); padding:20px; text-align:center; color:#fff;">
-  <h2>✨ Selamat Datang di Zakira Store ✨</h2>
-  <p>Gamis Syar'i Premium • Elegant • Ready Stock 🔥</p>
+<div class="header">
+  <div class="logo">
+    <a href="#">
+      <!-- LOGO FIX (ADA BACKUP) -->
+      <img src="logo.png" onerror="this.src='https://via.placeholder.com/150x60?text=Zakira';">
+      <span>Zakira Store</span>
+    </a>
+  </div>
+  <div class="menu">Home • Produk • Promo</div>
 </div>
 
-<!-- PRODUK -->
-<div style="display:flex; justify-content:center; margin-top:20px; padding:10px;">
+<!-- BANNER -->
+<div class="banner">
+  <h2>✨ Gamis Syar'i Premium ✨</h2>
+  <p>Elegant • Ready Stock • Diskon Hari Ini 🔥</p>
+</div>
 
-  <div style="background:#fff; padding:15px; width:280px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+<div class="container">
 
-    <!-- LABEL -->
-    <div style="display:flex; justify-content:space-between;">
-      <span style="background:red; color:#fff; padding:4px 8px; border-radius:5px;">🔥 Terlaris</span>
-      <span style="background:orange; color:#fff; padding:4px 8px; border-radius:5px;">Diskon 20%</span>
+  <!-- PRODUK -->
+  <div class="card" onclick="showDetail()">
+    <img src="gamis1.JPG" onerror="this.src='https://via.placeholder.com/400x500?text=Produk';">
+    <h3>Zakira Nuzaybah Dress</h3>
+    <p class="price">Rp584.000</p>
+  </div>
+
+  <!-- DETAIL -->
+  <div id="detail" class="detail">
+
+    <div class="card">
+      <h2>Zakira Nuzaybah Dress</h2>
+
+      <div class="slide">
+        <img src="gamis1.JPG">
+        <img src="gamis2.JPG">
+        <img src="gamis3.JPG">
+      </div>
+
+      <p class="old">Rp750.000</p>
+      <p class="price">Rp584.000 💸</p>
+
+      <p class="urgent">⏰ Promo: <span id="timer"></span></p>
+
+      <select id="size">
+        <option value="">Pilih Size</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL</option>
+      </select>
+
+      <select id="warna">
+        <option value="">Pilih Warna</option>
+        <option>Hitam</option>
+        <option>Coklat</option>
+        <option>Abu</option>
+      </select>
+
+      <a class="btn" onclick="beli()">🛒 Beli Sekarang</a>
     </div>
-
-    <!-- FOTO SLIDE -->
-    <p style="color:gray; margin-top:10px;">📸 Geser foto</p>
-    <div style="display:flex; overflow-x:auto; gap:10px;">
-
-      <img src="gamis1.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis2.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis3.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis4.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis5.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis6.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis7.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis8.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis9.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis10.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis11.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis12.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis13.JPG" style="width:220px; border-radius:10px;">
-      <img src="gamis14.JPG" style="width:220px; border-radius:10px;">
-
-    </div>
-
-    <!-- NAMA -->
-    <h3 style="margin-top:10px;">Zakira Nuzaybah Dress</h3>
-
-    <!-- RATING -->
-    <p style="color:#f5a623;">⭐⭐⭐⭐⭐ <span style="color:#333;">4.9 | 1.2k Terjual</span></p>
-
-    <!-- HARGA -->
-    <p style="text-decoration:line-through; color:gray;">Rp750.000</p>
-    <p style="color:#25D366; font-weight:bold; font-size:20px;">Rp584.000 💸</p>
-
-    <!-- BONUS TRUST -->
-    <p style="color:#ff5722; font-weight:bold;">🚚 Gratis Ongkir Hari Ini</p>
-    <p style="color:green;">📦 Ready Stock • Stok Terbatas!</p>
-    <p style="color:gray;">✔ Garansi barang sesuai foto</p>
-    <p style="font-size:12px; color:gray;">🔒 100% Aman • Sudah 1000+ pembeli</p>
-
-    <!-- BUTTON -->
-    <a href="https://wa.me/6281806874719?text=Assalamualaikum%20kak,%20saya%20mau%20order%20Zakira%20Nuzaybah%20Dress"
-       style="background:#25D366; color:#fff; padding:12px; display:block; text-align:center; border-radius:8px; text-decoration:none; font-weight:bold;">
-       🛒 Beli Sekarang
-    </a>
 
   </div>
 
 </div>
 
-<!-- CHAT ADMIN FLOATING -->
-<div style="position:fixed; bottom:20px; right:20px;">
-  <a href="https://wa.me/6281806874719?text=Assalamualaikum%20kak,%20saya%20ingin%20tanya%20produk%20Zakira"
-     style="background:#25D366; color:#fff; padding:15px; border-radius:50px; text-decoration:none; box-shadow:0 4px 8px rgba(0,0,0,0.2);">
-     💬 Chat Admin
-  </a>
-</div>
+<!-- WA -->
+<a class="wa" href="https://wa.me/6287777747647">💬</a>
+
+<script>
+
+function showDetail() {
+  document.getElementById("detail").style.display = "block";
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+var time = 600;
+setInterval(function(){
+  var min = Math.floor(time/60);
+  var sec = time%60;
+  var el = document.getElementById("timer");
+  if(el){
+    el.innerHTML = min + "m " + sec + "s";
+  }
+  time--;
+},1000);
+
+function beli() {
+  var size = document.getElementById("size").value;
+  var warna = document.getElementById("warna").value;
+
+  var pesan = "Assalamualaikum kak 😊%0A";
+  pesan += "Saya mau order Zakira Nuzaybah Dress%0A";
+  pesan += "Size: " + size + "%0A";
+  pesan += "Warna: " + warna;
+
+  window.open("https://wa.me/6287777747647?text=" + pesan);
+}
+
+</script>
 
 </body>
 </html>
